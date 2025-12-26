@@ -25,12 +25,12 @@ insert msg@(LogMessage _ timeStamp _) tree@(Node left cur@(LogMessage _ tS _) ri
   | tree == Leaf      = Node Leaf msg Leaf 
 
 build :: [LogMessage] -> MessageTree
-build = foldl (\acc msg -> insert msg acc) Leaf
+build = foldr insert Leaf
 
 inOrder :: MessageTree -> [LogMessage]
 inOrder Leaf = []
 inOrder (Node left msg Leaf) = inOrder left ++ [msg]
-inOrder (Node Leaf msg right) = [msg] ++ inOrder right
+inOrder (Node Leaf msg right) = msg : inOrder right
 inOrder (Node left msg right) = inOrder left ++ [msg] ++ inOrder right
 
 errorAnd50 :: LogMessage -> Bool
