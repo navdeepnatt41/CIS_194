@@ -80,7 +80,7 @@ c1 = 'x'
 c2 = 'Ø'
 c3 = 'ダ'
 
--- Strings are lists of characters with special syntax
+-- Strings are lists of characters with special syntax (i.e. "[Char] == String")
 s :: String
 s = "Hello, Haskell"
 ```
@@ -144,6 +144,7 @@ ex20 = 1 : (2 : [])
 hailstoneSeq :: Integer -> [Integer]
 hailstoneSeq 1 = [1]
 hailstoneSeq n = n : hailstoneSeq (hailstone n)
+```
 
 ## Functions on Lists
 - We can write functions on lists using pattern matching
@@ -152,6 +153,7 @@ intListLength :: [Integer] -> Integer
 intListLength [] = 0
 intListLength (x:xs) = x + intListLength xs
 -- Note we can use `_` instead of assigning a variable to the pattern if we don't need it
+```
 
 ## Combining functions
 - I'm not going to write the function, but don't be afraid; functions that you think might take up a lot more space
