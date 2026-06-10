@@ -87,13 +87,36 @@ s = "Hello, Haskell"
 
 ## Arithmetic
 - Typical operators that you would expect
+    - +
+    - -
+    - *
+    - /
+    - mod
+    - ^
 - Backticks(``) allow you to make operators **infix**
+``` Haskell
+ex01 = 19 `mod` 3
+```
+- Negative numbers must be surrounded by parentheses
+- Addition must always be done between numbers of the same type
+- For floating point division, we must use `div`
+``` Haskell
+ex02 = 19.4 `div` 4.7
+```
 
 ## Boolean logic
-- Basic equality operators, come on you KNOW this
+- Basic equality operators
+    - `&&`: logical AND
+    - `||`: logical OR
+    - `==`: equality
+    - `/=`: not equal
+    - `<, <=, >, >=`
 - Also, there are if-expressions
     - if-expressions require an else clause which differs from if-statements
-
+``` Haskell
+ex03 = if 2 == 2 then True else False
+```
+- Note*: Idiomatic Haskell avoids using `if` statements - pattern matching and *guards* are preferred
 ## Defining basic functions
 - We can write functions that work based off of cases
 ``` Haskell
@@ -135,6 +158,7 @@ range2 = [2,4..100]
 ```
 
 ## Constructing Lists
+- Lists can be built using the *Cons* operator (:). It's used to *prepend* elements
 ``` Haskell
 emptyList = []
 ex18 = 1 : []
@@ -145,6 +169,7 @@ hailstoneSeq :: Integer -> [Integer]
 hailstoneSeq 1 = [1]
 hailstoneSeq n = n : hailstoneSeq (hailstone n)
 ```
+- Since strings are just lists of characters, functions that can process lists and also process strings (`[Char] == String`)
 
 ## Functions on Lists
 - We can write functions on lists using pattern matching
@@ -160,3 +185,4 @@ intListLength (x:xs) = x + intListLength xs
   actually may not due to lazy evaluation
 
 ## Don't Be Scared of Messages
+- Read the error message carefully - they may look like C++ errors, but they are actually quite informative if you read them
