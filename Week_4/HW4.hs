@@ -45,3 +45,9 @@ map' f  = foldr ((:) . f) []
 myfoldl :: (b -> a -> b) -> b -> [a] -> b
 myfoldl f z xs = foldr (\e acc v -> acc (f v e)) id xs z
 
+-- Exercise 4: Finding primes 
+ofForm :: Integer -> [Integer]
+ofForm n = filter (<=n) $ [ x + y + 2*x*y | x <- [1..n], y <- [x..n]]
+
+sieveSundaram :: Integer -> [Integer]
+sieveSundaram n = map (\e -> 2*e + 1) $ filter (\e -> e `notElem` ofForm n) [1..n]
