@@ -12,7 +12,28 @@ fun2 = sum
 
 -- Exercise 2: Folding with trees
 -- To be done...
+data Tree a = Leaf | Node Integer (Tree a) a (Tree a)
+  deriving (Show, Eq)
+height :: Tree a -> Integer
+height Leaf = -1
+height n@(Node h _ _ _) = h
 
+makeNode :: a -> Tree a -> Tree a -> Tree a
+makeNode v left right = 
+  Node (1 + max (height left) (height right)) left v right
+
+insert :: a -> Tree a -> Tree a
+insert v Leaf = Node 0 Leaf v Leaf
+insert v t@(Node h left val right)
+  | height left == height right    = makeNode val newL right
+  | otherwise                      = makeNode val left newR
+    where 
+      newL = insert v left 
+      newR = insert v right
+ 
+foldTree :: [a] -> Tree a 
+foldTree = foldr insert Leaf
+ 
 -- Exercise 3: More folds!
 xor :: [Bool] -> Bool
 xor = foldr (/=) False
@@ -21,3 +42,6 @@ map' :: (a -> b) -> [a] -> [b]
 map' f  = foldr ((:) . f) []
 
 -- Optional Exercise: foldl in terms of foldr
+myfoldl :: (b -> a -> b) -> b -> [a] -> b
+myfoldl f z xs = foldr (\e acc v -> acc (f v e)) id xs z
+
